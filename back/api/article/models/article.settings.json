@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "name": "Article"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "apropos": {
+      "type": "text",
+      "required": true,
+      "unique": true
+    },
+    "letexteenrichi": {
+      "type": "richtext"
+    },
+    "categories": {
+      "via": "articles",
+      "collection": "categorie"
+    }
+  }
+}
