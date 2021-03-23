@@ -1,11 +1,17 @@
 <template>
   <div class="container">
-    <Home />
+    <div v-if="error">
+      {{ error }}
+    </div>
+    <ul v-else>
+      <li v-for="article in articles" :key="article.id">
+        {{ article.apropos }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import Home from "../components/Home"
 export default {
   name: 'App',
   data () {
