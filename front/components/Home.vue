@@ -24,9 +24,9 @@
         <button class="button__top text-small border border-black rounded-full h-16">En</button>
         <div class="nav border-r border-black h-full">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li class="nav__item text-small">Home</li>
-            <li class="nav__item text-small">My experiences</li>
-            <li class="nav__item text-small">Contact me</li>
+            <li class="nav__item text-small"><a href="#">Home</a></li>
+            <li class="nav__item text-small"><a href="#">Mes expériences</a></li>
+            <li class="nav__item text-small"><a href="#">Contact</a></li>
           </ul>
         </div>
       </div>
