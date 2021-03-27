@@ -6,7 +6,8 @@ export default {
   head: {
     title: 'astridddenis',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
+      class: 'w-full h-full'
     },
     meta: [
       { charset: 'utf-8' },
@@ -15,7 +16,10 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    bodyAttrs: {
+      class: 'w-full h-full'
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
