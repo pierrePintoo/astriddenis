@@ -15,18 +15,18 @@
           <h1>Hello, c'est Astrido</h1>
           <h1>Je suis une communicante passionnée</h1>
         </div>
-        <div>
-          <span>Button</span>
-          <a href="#" class="text-linkBig">Check my experiences</a>
+        <div class="flex items-center">
+          <button class="border border-black rounded-full h-20 w-20"></button>
+          <a href="#" class="ml-8 text-linkBig">Check my experiences</a>
         </div>
       </div>
       <div class="landing_page--right flex flex-col items-end">
         <button class="button__top text-small border border-black rounded-full h-16">En</button>
         <div class="nav border-r border-black h-full">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li class="nav__item text-small"><a href="#">Home</a></li>
-            <li class="nav__item text-small"><a href="#">Mes expériences</a></li>
-            <li class="nav__item text-small"><a href="#">Contact</a></li>
+            <li class="nav__item text-small flex items-center"><a href="#" class="font-bold">Home</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-black mb-1"></span></li>
+            <li class="nav__item text-small flex items-center"><a href="#">Mes expériences</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink"></span></li>
+            <li class="nav__item text-small flex items-center"><a href="#">Contact</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1"></span></li>
           </ul>
         </div>
       </div>
@@ -61,6 +61,10 @@ export default {
   .nav {
     margin-top: 5.5rem;
     padding-right: 3.5rem;
+  }
+
+  .nav__item__right {
+    right : 8.0625rem
   }
 
   .button__top {
