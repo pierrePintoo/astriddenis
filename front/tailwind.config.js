@@ -10,7 +10,11 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {},
+  variants: {
+    extend: {
+      translate: ['group-hover']
+    },
+  },
   plugins: [
     plugin(function({ addBase, theme }) {
       addBase({

@@ -15,8 +15,8 @@
           <h1>Hello, c'est Astrido</h1>
           <h1>Je suis une communicante passionnée</h1>
         </div>
-        <div class="flex items-center">
-          <button class="border border-black rounded-full h-20 w-20"></button>
+        <div class="group flex items-center cursor-pointer">
+          <button class="border border-black rounded-full h-20 w-20"><img src="~/assets/icons/arrow-right.svg" alt="" class="w-8 m-auto transform rotate-90 group-hover:translate-y-2 transition duration-200"></button>
           <a href="#" class="ml-8 text-linkBig">Check my experiences</a>
         </div>
       </div>
