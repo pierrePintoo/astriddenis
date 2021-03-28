@@ -1,5 +1,8 @@
 <template>
     <div class="h-full landing_block flex justify-between">
+      <div class="absolute right-96 top-32">
+          <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src">
+      </div>
       <div class="landing_page--left h-full flex flex-col justify-between">
         <a href="#" class="text-linkBig">Astrido</a>
         <div>
