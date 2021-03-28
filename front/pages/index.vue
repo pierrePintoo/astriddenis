@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full h-full">
+  <div class="container max-w-none">
     <Home />
   </div>
 </template>

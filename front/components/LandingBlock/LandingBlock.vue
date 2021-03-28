@@ -1,20 +1,20 @@
 <template>
-    <div class="h-full landing_block flex justify-between">
+    <div class="landing_block flex justify-between">
       <div class="absolute right-96 top-32">
           <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src">
       </div>
-      <div class="landing_page--left h-full flex flex-col justify-between">
-        <a href="#" class="text-linkBig">Astrido</a>
-        <div>
+      <div class="landing_block--left flex flex-col justify-between">
+        <a href="#" class="landing_block--left__top text-linkBig">Astrido</a>
+        <div class="landing_block--left__center">
           <h1>Hello, c'est Astrido</h1>
           <h1>Je suis une communicante passionnée</h1>
         </div>
         <div class="group flex items-center cursor-pointer">
           <button class="border border-black rounded-full h-20 w-20"><img src="~/assets/icons/arrow-right.svg" alt="" class="w-8 m-auto transform rotate-90 group-hover:translate-y-2 transition duration-200"></button>
-          <a href="#" class="ml-8 text-linkBig">Check my experiences</a>
+          <a href="#" class="ml-8 text-linkBig">Voir mes expériences</a>
         </div>
       </div>
-      <div class="landing_page--right flex flex-col items-end">
+      <div class="landing_block--right flex flex-col items-end">
         <button class="button__top text-small border border-black rounded-full h-16">En</button>
         <div class="nav border-r border-black h-full">
           <ul class="h-full flex flex-col justify-between items-end">
@@ -36,17 +36,32 @@ export default {
       error: null
     }
   },
-  async mounted () {
+  async beforeCreate () {
     try {
       this.articles = await this.$strapi.$articles.find()
       console.log(this.articles)
     } catch (error) {
       this.error = error
     }
+    this.computeHeightBlock()
+  },
+  methods: {
+    computeHeightBlock: function () {
+        const block = document.querySelector('.landing_block')
+        const paddingTop = 60
+        block.style.height = `${window.innerHeight - paddingTop}px`
+
+        window.addEventListener('resize', () => {
+            block.style.height = `${window.innerHeight - paddingTop}px`
+        })
+    }
   }
 }
 </script>
 <style scoped>
+  .landing_block {
+    padding-bottom: 6rem;
+  }
   .nav {
     margin-top: 5.5rem;
     padding-right: 3.5rem;
@@ -59,4 +74,13 @@ export default {
   .button__top {
     width: 3.375rem;
   }
+
+  .landing_page--left__top {
+      margin-bottom: 13rem;
+  }
+
+  .landing_page--left__center {
+      margin-bottom: 23.5rem;
+  }
+
 </style>
