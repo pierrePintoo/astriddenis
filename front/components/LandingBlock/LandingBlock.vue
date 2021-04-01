@@ -9,13 +9,15 @@
           <h1>Hello, c'est Astrido</h1>
           <h1>Je suis une communicante passionnée</h1>
         </div>
-        <div class="group flex items-center cursor-pointer">
-          <button class="border border-black rounded-full h-20 w-20"><img src="~/assets/icons/arrow-right.svg" alt="" class="w-8 m-auto transform rotate-90 group-hover:translate-y-2 transition duration-200"></button>
-          <a href="#" class="ml-8 text-linkBig">Voir mes expériences</a>
+        <div class="landing_block--left__bottom group flex items-center cursor-pointer">
+            <button class="btn landing_block--left__bottom__left"></button>
+            <a href="#" class="ml-8 text-linkBig">Voir mes expériences</a>
         </div>
       </div>
       <div class="landing_block--right flex flex-col items-end">
-        <button class="button__top text-small border border-black rounded-full h-16">En</button>
+        <div>
+          <button class="btn">EN</button>
+        </div>
         <div class="nav border-r border-black h-full">
           <ul class="h-full flex flex-col justify-between items-end">
             <li class="nav__item text-small flex items-center"><a href="#" class="font-bold">Home</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-black mb-1"></span></li>
@@ -71,16 +73,18 @@ export default {
     right : 8.0625rem
   }
 
-  .button__top {
-    width: 3.375rem;
-  }
-
   .landing_page--left__top {
       margin-bottom: 13rem;
   }
 
   .landing_page--left__center {
       margin-bottom: 23.5rem;
+  }
+
+  .landing_block--left__bottom .landing_block--left__bottom__left{
+    background: center no-repeat url('~/assets/icons/arrow-right.svg');
+    background-size: 30%;
+    transform: rotate(90deg);
   }
 
 </style>
