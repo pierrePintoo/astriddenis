@@ -10,7 +10,9 @@
           <h1>Je suis une communicante passionnée</h1>
         </div>
         <div class="landing_block--left__bottom group flex items-center cursor-pointer">
-            <button class="btn landing_block--left__bottom__left"></button>
+            <button class="btn landing_block--left__bottom__left">
+              <ArrowRight  width="40" height="40" style="margin: auto; transform:rotate(90deg)"/>
+            </button>
             <a href="#" class="ml-8 text-linkBig">Voir mes expériences</a>
         </div>
       </div>
@@ -30,8 +32,13 @@
 </template>
 
 <script>
+import ArrowRight from '~/components/Icons/ArrowRight.vue';
+
 export default {
   name: 'LandingBlock',
+  components: {
+    ArrowRight
+  },
   data () {
     return {
       articles: [],
@@ -79,12 +86,6 @@ export default {
 
   .landing_page--left__center {
       margin-bottom: 23.5rem;
-  }
-
-  .landing_block--left__bottom .landing_block--left__bottom__left{
-    background: center no-repeat url('~/assets/icons/arrow-right.svg');
-    background-size: 30%;
-    transform: rotate(90deg);
   }
 
 </style>
