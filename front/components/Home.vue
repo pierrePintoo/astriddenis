@@ -1,16 +1,17 @@
 <template>
-  <div class="main bg-pink">
-    <LandingBlock />
-    <Section />
+  <div class="main flex bg-pink">
+    <Content />
+    <Bar />
   </div>
 </template>
 
 <script>
-import LandingBlock from "./LandingBlock/LandingBlock"
-import Section from "./Timeline/Section"
+import Content from "./Content"
+import Bar from "./Timeline/Bar"
+
 export default {
-  components: { Section },
   name: 'Home',
+  components: { Bar },
   data () {
     return {
     }
