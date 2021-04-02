@@ -26,6 +26,6 @@ export default {
 </script>
 <style>
   .btn {
-    @apply border border-black rounded-full h-20 w-20;
+    @apply border border-black rounded-full h-14 w-14;
   }
 </style>
