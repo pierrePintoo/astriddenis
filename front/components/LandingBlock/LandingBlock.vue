@@ -1,7 +1,7 @@
 <template>
     <div class="landing_block flex justify-between">
       <div class="absolute right-96 top-32">
-          <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src">
+          <!-- <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src"> -->
       </div>
       <div class="landing_block--left flex flex-col justify-between">
         <a href="#" class="landing_block--left__top text-linkBig">Astrido</a>
@@ -11,7 +11,7 @@
         </div>
         <div class="landing_block--left__bottom group flex items-center cursor-pointer">
             <button class="btn landing_block--left__bottom__left">
-              <ArrowRight  width="40" height="40" style="margin: auto; transform:rotate(90deg)"/>
+              <ArrowRight  width="40" height="40" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
             <a href="#" class="ml-8 text-linkBig">Voir mes expériences</a>
         </div>
