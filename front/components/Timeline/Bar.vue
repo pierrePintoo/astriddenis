@@ -1,5 +1,5 @@
 <template>
-      <div class="bar flex flex-col items-end">
+      <div :style="{ height: barHeight}" class="bar flex flex-col items-end">
         <div>
           <button class="btn bar__top">EN</button>
         </div>
@@ -16,10 +16,14 @@
 <script>
     export default {
         name: 'Bar',
+        props: ["barHeight"],
         data () {
             return {
             }
         },
+        async mounted () {
+            // console.log('wesheu : ', barHeight)
+        }
     }
 </script>
 

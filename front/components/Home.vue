@@ -1,7 +1,7 @@
 <template>
   <div class="main flex bg-pink">
-    <Content />
-    <Bar />
+    <Content :sectionHeight = windowHeight />
+    <Bar :barHeight = windowHeight />
   </div>
 </template>
 
@@ -14,6 +14,23 @@ export default {
   components: { Bar },
   data () {
     return {
+      windowWidth: null,
+      windowHeight: null
+    }
+  },
+  async mounted () {
+    this.computeHeightWindow()
+},
+methods: {
+    computeHeightWindow: function () {
+        // First loading page
+        const paddingTop = 60
+
+        this.windowHeight = `${window.innerHeight - paddingTop}px`
+
+        window.addEventListener('resize', () => {
+            this.windowHeight = `${window.innerHeight - paddingTop}px`
+        })
     }
   }
 }
