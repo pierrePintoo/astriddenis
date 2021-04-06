@@ -33,6 +33,7 @@ module.exports = {
     fontSize: {
       h1: '5rem',
       linkBig: '2.5rem',
+      big: '2.5rem',
       small: '1.125rem'
     }
   }
