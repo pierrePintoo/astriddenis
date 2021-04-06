@@ -1,5 +1,5 @@
 <template>
-    <div class="landing_block h-screen">
+    <div :style="{height: this.windowHeight}" class="landing_block pb-14">
       <div class="absolute right-96 top-32">
           <!-- <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src"> -->
       </div>
@@ -11,7 +11,7 @@
         </div>
         <div class="landing_block--left__bottom group flex items-center cursor-pointer">
             <button class="btn absolute landing_block--left__bottom__left">
-              <ArrowRight  width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
+              <ArrowRight width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
             <a href="#" class="ml-14 text-linkBig">Voir mes expériences</a>
         </div>
@@ -28,27 +28,23 @@ export default {
   components: {
     ArrowRight
   },
+  props: ['windowHeight'],
   data () {
     return {
       articles: [],
       error: null
     }
   },
-  async beforeCreate () {
+  async mounted () {
     try {
       this.articles = await this.$strapi.$articles.find()
-      console.log(this.articles)
     } catch (error) {
       this.error = error
     }
-  },
+  }
 }
 </script>
 <style scoped>
-  .landing_block {
-    padding-bottom: 6.175rem;
-  }
-
   .landing_page--left__top {
       margin-bottom: 13rem;
   }

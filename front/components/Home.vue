@@ -1,6 +1,6 @@
 <template>
   <div class="main flex justify-between bg-pink">
-    <Content :sectionHeight = windowHeight />
+    <Content :windowHeight = windowHeight />
     <Bar :barHeight = windowHeight />
   </div>
 </template>
@@ -15,24 +15,32 @@ export default {
   data () {
     return {
       windowWidth: null,
-      windowHeight: null
+      windowHeight: window.innerHeight,
+      paddingTop: 60
     }
   },
   async mounted () {
-    this.computeHeightWindow()
-},
-methods: {
-    computeHeightWindow: function () {
-        // First loading page
-        const paddingTop = 60
+    this.launchResizeListener()
+  },
+  async updated () {
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been re-rendered
+      this.computeHeightWindow()
+    })
+  },
+  methods: {
+      computeHeightWindow: function () {
+          // First loading page
 
-        this.windowHeight = `${window.innerHeight - paddingTop}px`
-
-        window.addEventListener('resize', () => {
-            this.windowHeight = `${window.innerHeight - paddingTop}px`
-        })
+          this.windowHeight = `${window.innerHeight - this.paddingTop}px`
+      },
+      launchResizeListener: function () {
+          window.addEventListener('resize', () => {
+              this.windowHeight = `${window.innerHeight - this.paddingTop}px`
+          })
+      }
     }
-  }
 }
 </script>
 <style scoped>

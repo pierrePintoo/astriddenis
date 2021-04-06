@@ -1,7 +1,7 @@
 <template>
     <div class="content">
-        <LandingBlock />
-        <Section />
+        <LandingBlock :windowHeight = this.windowHeight />
+        <Section :windowHeight = this.windowHeight />
     </div>
 </template>
 <script>
@@ -11,24 +11,9 @@
     export default {
         name: 'Content',
         components: { Section },
-        props: ['sectionHeight'],
+        props: ['windowHeight'],
         data () {
             return {
-            }
-        },
-        async mounted () {
-            this.computeHeightBlock()
-        },
-        methods: {
-            computeHeightBlock: function () {
-                console.log('wesheu : ', this.sectionHeight)
-                let childrens = document.querySelector('.content').children
-
-                // First loading page
-
-                for(let i = 0; i < childrens.length; i++){
-                    childrens[i].style.height = this.sectionHeight
-                }
             }
         }
     }
