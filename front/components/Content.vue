@@ -13,7 +13,8 @@
         components: { Section },
         data () {
             return {
-                height: null
+                height: null,
+                width: null
             }
         },
         async mounted () {
