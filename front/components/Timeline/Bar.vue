@@ -5,9 +5,9 @@
         </div>
         <div class="nav border-r border-black h-full">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li class="nav__item text-small flex items-center"><a href="#" class="font-bold">Home</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-black mb-1"></span></li>
-            <li class="nav__item text-small flex items-center"><a href="#">Mes expériences</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink"></span></li>
-            <li class="nav__item text-small flex items-center"><a href="#">Contact</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1"></span></li>
+            <li class="nav__item nav__item--first text-small flex items-center relative bottom-1"><a href="#" class="font-bold">Home</a></li>
+            <li class="nav__item text-small flex items-center"><a href="#">Mes expériences</a></li>
+            <li class="nav__item nav__item--last text-small flex items-center relative top-1"><a href="#">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -34,5 +34,16 @@
 
     .nav__item__right {
         right : 8.0625rem
+    }
+
+    .nav__item::after {
+        position: relative;
+        content: '';
+        width: 20px;
+        height: 20px;
+        border: solid 1px black;
+        border-radius: 9999px;
+        left: 67px;
+        background: #FFBFBF;
     }
 </style>

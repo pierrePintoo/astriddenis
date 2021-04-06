@@ -25,11 +25,17 @@
 
                 let childrens = document.querySelector('.content').children
 
+                // First loading page
+                this.height = `${window.innerHeight - paddingTop}px`
+
+                for(let i = 0; i < childrens.length; i++){
+                    childrens[i].style.height = this.height
+                }
+
                 window.addEventListener('resize', () => {
                     this.height = `${window.innerHeight - paddingTop}px`
                     for(let i = 0; i < childrens.length; i++){
                         childrens[i].style.height = this.height
-                        console.log('cc', childrens[0].style.height)
                     }
                 })
             }
