@@ -1,6 +1,7 @@
 <template>
-  <div class="section">
-      <h1>Coucou</h1>
+  <div class="section border-l border-black">
+      <span class="section__bullet btn bg-pink block absolute"></span>
+      <h2 class="section__title ml-16 text-big">Je nais</h2>
   </div>
 </template>
 
@@ -14,4 +15,7 @@ export default {
 }
 </script>
 <style scoped>
+  .section__bullet {
+    left: 112px;
+  }
 </style>
