@@ -29,7 +29,7 @@
 
 <style scoped>
     .bar {
-        height: 85vh;
+        height: 82vh;
         top: 60px;
     }
 
