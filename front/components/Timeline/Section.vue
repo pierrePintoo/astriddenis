@@ -1,5 +1,5 @@
 <template>
-  <div :style="{height: this.windowHeight}" class="section border-l border-black h-screen flex flex-col justify-between pb-24">
+  <div :style="{height: this.windowHeight}" class="section border-l border-black h-screen flex flex-col justify-between pb-14">
     <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
       <h2 class="section__title ml-16 text-big">Je nais</h2>
@@ -11,7 +11,7 @@
       <button class="btn section__bottom__left ml-14">
         <!-- <ArrowRight  width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/> -->
       </button>
-      <a href="#" class="ml-6 text-linkBig">Voir mes expériences</a>
+      <a href="#" class="ml-6 text-linkBig">Écouter mes souvenirs</a>
     </div>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
 }
 </script>
 <style scoped>
+  .section {
+    padding-top: 3.75rem;
+  }
+  
   .section__bullet {
     left: 112px;
   }
