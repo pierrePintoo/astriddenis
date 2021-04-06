@@ -1,7 +1,7 @@
 <template>
       <div :style="{ height: barHeight}" class="bar flex flex-col items-end sticky">
         <div>
-          <button class="btn bar__top">EN</button>
+          <button class="btn bar__top relative">EN</button>
         </div>
         <div class="nav border-r border-black h-full">
           <ul class="h-full flex flex-col justify-between items-end">
@@ -29,8 +29,14 @@
 
 <style scoped>
     .bar {
+        top: 60px;
         padding-bottom: 6.875rem;
     }
+
+    .bar__top {
+        left: 28px;
+    }
+
     .nav {
         margin-top: 5.5rem;
         padding-right: 3.5rem;
