@@ -1,5 +1,5 @@
 <template>
-  <div class="main flex bg-pink">
+  <div class="main flex justify-between bg-pink">
     <Content :sectionHeight = windowHeight />
     <Bar :barHeight = windowHeight />
   </div>
