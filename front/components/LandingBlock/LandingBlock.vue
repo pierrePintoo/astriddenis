@@ -10,10 +10,10 @@
           <h1>Je suis une communicante passionnée</h1>
         </div>
         <div class="landing_block--left__bottom group flex items-center cursor-pointer">
-            <button class="btn landing_block--left__bottom__left">
+            <button class="btn absolute landing_block--left__bottom__left">
               <ArrowRight  width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
-            <a href="#" class="ml-8 text-linkBig">Voir mes expériences</a>
+            <a href="#" class="ml-14 text-linkBig">Voir mes expériences</a>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ export default {
 </script>
 <style scoped>
   .landing_block {
-    padding-bottom: 6.875rem;
+    padding-bottom: 6.175rem;
   }
 
   .landing_page--left__top {
@@ -60,6 +60,10 @@ export default {
   .landing_block--right__top {
     position: relative;
     left: 12px;
+  }
+
+  .landing_block--left__bottom__left {
+    left: 112px;
   }
 
 </style>
