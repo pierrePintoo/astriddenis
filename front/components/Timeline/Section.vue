@@ -1,7 +1,18 @@
 <template>
-  <div class="section border-l border-black">
+  <div :style="{height: this.windowHeight}" class="section border-l border-black h-screen flex flex-col justify-between pb-24">
+    <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
       <h2 class="section__title ml-16 text-big">Je nais</h2>
+    </div>
+    <div class="section__img">
+      <img class="section__img__item" src="~/assets/img/Scan.jpeg" alt="" />
+    </div>
+    <div class="section__bottom flex align-center">
+      <button class="btn section__bottom__left ml-14">
+        <!-- <ArrowRight  width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/> -->
+      </button>
+      <a href="#" class="ml-6 text-linkBig">Voir mes expériences</a>
+    </div>
   </div>
 </template>
 
@@ -11,11 +22,18 @@ export default {
   data () {
     return {
     }
-  },
+  }
 }
 </script>
 <style scoped>
   .section__bullet {
     left: 112px;
+  }
+
+  .section__img__item {
+    height: 200px;
+    transform: rotate(75deg);
+    position: relative;
+    left: 100px;
   }
 </style>
