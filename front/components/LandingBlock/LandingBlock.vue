@@ -16,7 +16,6 @@
             <a href="#" class="ml-14 text-linkBig">{{ homeContent.label_cta }}</a>
         </div>
       </div>
-
     </div>
 </template>
 
@@ -40,7 +39,6 @@ export default {
     try {
       // this.articles = await this.$strapi.$articles.find()
       this.homeContent = await this.$strapi.$accueil.find()
-      console.log('success' , this.homeContent.id)
     } catch (error) {
       console.log('error')
       this.error = error
