@@ -1,5 +1,5 @@
 <template>
-      <div :style="{height: `${this.barHeight}px`}" class="bar flex flex-col items-end pb-14 sticky">
+      <div :style="{height: `${this.barHeight - 60}px`}" class="bar flex flex-col items-end pb-14 sticky">
         <div>
           <button class="btn bar__top relative pr-1">EN</button>
         </div>
