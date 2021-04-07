@@ -1,5 +1,5 @@
 <template>
-  <div :style="{height: this.windowHeight}" class="section border-l border-black h-screen flex flex-col justify-between pb-14">
+  <div :style="{height: `${this.windowHeight + 60}px`}" class="section border-l border-black h-screen flex flex-col justify-between pb-14">
     <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
       <h2 class="section__title ml-16 text-big">Je nais</h2>
@@ -17,8 +17,10 @@
 </template>
 
 <script>
+
 export default {
   name: 'Section',
+  props: ["windowHeight"],
   data () {
     return {
     }
@@ -29,7 +31,7 @@ export default {
   .section {
     padding-top: 3.75rem;
   }
-  
+
   .section__bullet {
     left: 112px;
   }

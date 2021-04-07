@@ -33,11 +33,11 @@ export default {
       computeHeightWindow: function () {
           // First loading page
 
-          this.windowHeight = `${window.innerHeight - this.paddingTop}px`
+          this.windowHeight = window.innerHeight - this.paddingTop
       },
       launchResizeListener: function () {
           window.addEventListener('resize', () => {
-              this.windowHeight = `${window.innerHeight - this.paddingTop}px`
+              this.windowHeight = window.innerHeight - this.paddingTop
           })
       }
     }

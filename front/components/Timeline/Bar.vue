@@ -1,5 +1,5 @@
 <template>
-      <div class="bar flex flex-col items-end sticky h-screen">
+      <div :style="{height: `${this.barHeight}px`}" class="bar flex flex-col items-end pb-14 sticky">
         <div>
           <button class="btn bar__top relative">EN</button>
         </div>
@@ -29,7 +29,6 @@
 
 <style scoped>
     .bar {
-        height: 82vh;
         top: 60px;
     }
 
