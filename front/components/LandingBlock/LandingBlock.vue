@@ -1,5 +1,5 @@
 <template>
-    <div :style="{height: `${this.windowHeight - 60}px`}" class="landing_block pb-14">
+    <div :style="{height: `${this.windowHeight - 60}px`}" class="landing_block pb-14 pr-4">
       <div class="absolute right-96 top-32">
           <!-- <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src"> -->
       </div>
