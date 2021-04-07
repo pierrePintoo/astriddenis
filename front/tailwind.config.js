@@ -20,7 +20,7 @@ module.exports = {
       addBase({
         'body': { fontFamily: 'Snell Roundhand' },
         'h1': { fontSize: theme('fontSize.h1') },
-        // 'h2': { fontSize: theme('fontSize.xl') },
+        'h2': { fontSize: theme('fontSize.h2') },
         // 'h3': { fontSize: theme('fontSize.lg') },
       })
     })
@@ -32,6 +32,7 @@ module.exports = {
     },
     fontSize: {
       h1: '4rem',
+      h2: '3rem',
       linkBig: '2.5rem',
       big: '2.5rem',
       small: '1.125rem'
