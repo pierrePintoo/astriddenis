@@ -44,7 +44,7 @@ export default {
     '@nuxtjs/strapi'
   ],
   strapi: {
-    entities: ['articles', 'categories'],
+    entities: ['articles', 'experiences', 'accueil'],
     url: 'http://localhost:1337'
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
