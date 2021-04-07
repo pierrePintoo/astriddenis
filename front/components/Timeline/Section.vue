@@ -9,7 +9,7 @@
     </div>
     <div class="section__bottom flex align-center">
       <button class="btn section__bottom__left ml-14">
-        <!-- <ArrowRight  width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/> -->
+        <play-button  width="22" height="22" class="pl-1" style="margin: auto;"/>
       </button>
       <a href="#" class="ml-6 text-linkBig">Écouter mes souvenirs</a>
     </div>
@@ -17,10 +17,12 @@
 </template>
 
 <script>
+import PlayButton from '../Icons/PlayButton.vue'
 
 export default {
   name: 'Section',
   props: ["windowHeight"],
+  components: { PlayButton },
   data () {
     return {
     }
