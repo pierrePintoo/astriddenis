@@ -1,5 +1,5 @@
 <template>
-  <div :style="{height: `${this.windowHeight + 60}px`}" class="section border-l border-black h-screen flex flex-col justify-between pb-14">
+  <div :style="{height: `${this.windowHeight}px`}" class="section border-l border-black h-screen flex flex-col justify-between pb-14">
     <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
       <h2 class="section__title ml-16 text-big">Je nais</h2>

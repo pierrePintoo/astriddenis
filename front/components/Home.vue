@@ -15,8 +15,7 @@ export default {
   data () {
     return {
       windowWidth: null,
-      windowHeight: window.innerHeight,
-      paddingTop: 60
+      windowHeight: window.innerHeight
     }
   },
   async mounted () {
@@ -32,12 +31,11 @@ export default {
   methods: {
       computeHeightWindow: function () {
           // First loading page
-
-          this.windowHeight = window.innerHeight - this.paddingTop
+          this.windowHeight = window.innerHeight
       },
       launchResizeListener: function () {
           window.addEventListener('resize', () => {
-              this.windowHeight = window.innerHeight - this.paddingTop
+              this.windowHeight = window.innerHeight
           })
       }
     }

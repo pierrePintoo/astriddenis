@@ -1,5 +1,5 @@
 <template>
-  <div :style="{height: `${this.windowHeight + 60}px`}" class="contact">
+  <div :style="{height: `${this.windowHeight}px`}" class="contact">
       <h1>Contact</h1>
   </div>
 </template>
