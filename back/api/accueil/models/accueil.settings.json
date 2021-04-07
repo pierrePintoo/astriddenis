@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "accueils",
+  "info": {
+    "name": "Accueil",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "presentation": {
+      "type": "string",
+      "required": true
+    },
+    "catch_phrase": {
+      "type": "string"
+    },
+    "label_cta": {
+      "type": "string"
+    }
+  }
+}
