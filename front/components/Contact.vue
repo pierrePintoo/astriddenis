@@ -1,5 +1,5 @@
 <template>
-  <div :style="{height: `${this.windowHeight}px`}" class="contact pr-4">
+  <div class="contact pr-4 h-screen">
     <div class="contact__left h-full flex flex-col">
         <a href="#" class="contact__left__top text-linkBig mb-20">Astrido</a>
         <div class="contact__left__center">
@@ -16,7 +16,6 @@
 
 export default {
   name: 'Contact',
-  props: ["windowHeight"],
   data () {
     return {
     }
