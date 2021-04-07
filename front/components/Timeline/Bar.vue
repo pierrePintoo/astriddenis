@@ -1,7 +1,7 @@
 <template>
       <div :style="{height: `${this.barHeight}px`}" class="bar flex flex-col items-end pb-14 sticky">
         <div>
-          <button class="btn bar__top relative">EN</button>
+          <button class="btn bar__top relative pr-1">EN</button>
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
