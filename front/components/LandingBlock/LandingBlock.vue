@@ -4,16 +4,16 @@
           <!-- <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src"> -->
       </div>
       <div class="landing_block--left h-full flex flex-col justify-between">
-        <a href="#" class="landing_block--left__top text-linkBig">Astrido</a>
+        <a href="#" class="landing_block--left__top text-linkBig">{{ homeContent.title }}</a>
         <div class="landing_block--left__center">
-          <h1>Hello, c'est Astrido</h1>
-          <h1>Je suis une communicante passionnée</h1>
+          <h1>{{ homeContent.presentation }}</h1>
+          <h1>{{ homeContent.catch_phrase }}</h1>
         </div>
         <div class="landing_block--left__bottom group flex items-center cursor-pointer">
             <button class="btn absolute landing_block--left__bottom__left">
               <ArrowRight width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
-            <a href="#" class="ml-14 text-linkBig">Voir mes expériences</a>
+            <a href="#" class="ml-14 text-linkBig">{{ homeContent.label_cta }}</a>
         </div>
       </div>
 
@@ -32,13 +32,17 @@ export default {
   data () {
     return {
       articles: [],
-      error: null
+      error: null,
+      homeContent: []
     }
   },
   async mounted () {
     try {
-      this.articles = await this.$strapi.$articles.find()
+      // this.articles = await this.$strapi.$articles.find()
+      this.homeContent = await this.$strapi.$accueil.find()
+      console.log('success' , this.homeContent.id)
     } catch (error) {
+      console.log('error')
       this.error = error
     }
   }
