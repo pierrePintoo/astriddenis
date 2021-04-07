@@ -5,9 +5,9 @@
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li class="nav__item nav__item--first text-small flex items-center"><a href="#" class="font-bold">Home</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-black mb-1"></span></li>
-            <li class="nav__item text-small flex items-center"><a href="#">Mes expériences</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1"></span></li>
-            <li class="nav__item nav__item--last text-small flex items-center"><a href="#">Contact</a><span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1"></span></li>
+            <li class="nav__item nav__item--first text-small flex items-center"><a href="#" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-black mb-1"></span></a></li>
+            <li class="nav__item text-small flex items-center"><a href="#">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1"></span></a></li>
+            <li class="nav__item nav__item--last text-small flex items-center"><a href="#">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1"></span></a></li>
           </ul>
         </div>
       </div>
