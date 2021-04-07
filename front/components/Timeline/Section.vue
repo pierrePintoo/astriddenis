@@ -1,8 +1,8 @@
 <template>
-  <div :style="{height: `${this.windowHeight}px`}" class="section border-l border-black h-screen flex flex-col justify-between pb-14">
+  <div class="section border-l border-black h-screen flex flex-col justify-between pb-14">
     <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
-      <h2 class="section__title ml-16 text-big">Je nais</h2>
+      <h2 class="section__title ml-16 text-big">{{ title }}</h2>
     </div>
     <div class="section__img">
       <img class="section__img__item" src="~/assets/img/Scan.jpeg" alt="" />
@@ -21,7 +21,7 @@ import PlayButton from '../Icons/PlayButton.vue'
 
 export default {
   name: 'Section',
-  props: ["windowHeight"],
+  props: ["windowHeight", "title"],
   components: { PlayButton },
   data () {
     return {

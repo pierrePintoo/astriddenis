@@ -1,8 +1,12 @@
 <template>
     <div class="content">
         <LandingBlock :windowHeight = this.windowHeight />
-        <Section :windowHeight = this.windowHeight />
-        <Contact :windowHeight = this.windowHeight />
+        <Section 
+            v-for="experience in experiences"
+            :key="experience.id"
+            :title="experience.title"
+        />
+        <Contact />
     </div>
 </template>
 <script>
@@ -16,6 +20,17 @@
         props: ['windowHeight'],
         data () {
             return {
+                experiences: []
+            }
+        },
+        async mounted () {
+            try {
+                // this.articles = await this.$strapi.$articles.find()
+                this.experiences = await this.$strapi.$experiences.find()
+                console.log('success' , this.experiences)
+            } catch (error) {
+                console.log('error')
+                this.error = error
             }
         }
     }
