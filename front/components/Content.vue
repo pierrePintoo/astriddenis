@@ -5,6 +5,8 @@
             v-for="experience in experiences"
             :key="experience.id"
             :title="experience.title"
+            :images="experience.images"
+            :audio="experience.enregistrement"
         />
         <Contact />
     </div>

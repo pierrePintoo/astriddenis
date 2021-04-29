@@ -5,7 +5,7 @@
       <h2 class="section__title ml-16 text-big">{{ title }}</h2>
     </div>
     <div class="section__img">
-      <img class="section__img__item" src="~/assets/img/Scan.jpeg" alt="" />
+      <img v-for="image in images" :key="image.id" :src="'http://localhost:1337' + image.url" class="section__img__item" alt="" />
     </div>
     <div class="section__bottom flex align-center">
       <button class="btn section__bottom__left ml-14">
@@ -13,6 +13,9 @@
       </button>
       <a href="#" class="ml-6 text-linkBig">Écouter mes souvenirs</a>
     </div>
+            <audio controls>
+              <source :src="'http://localhost:1337' + audio.url" type="audio/ogg">
+            </audio>
   </div>
 </template>
 
@@ -21,10 +24,15 @@ import PlayButton from '../Icons/PlayButton.vue'
 
 export default {
   name: 'Section',
-  props: ["windowHeight", "title"],
+  props: ["windowHeight", "title", "images", "audio"],
   components: { PlayButton },
   data () {
     return {
+    }
+  },
+  methods: {
+    logImages: function() {
+      console.log(this)
     }
   }
 }
@@ -40,7 +48,7 @@ export default {
 
   .section__img__item {
     height: 200px;
-    transform: rotate(75deg);
+    transform: rotate(-45deg);
     position: relative;
     left: 100px;
   }
