@@ -5,9 +5,9 @@
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li class="nav__item nav__item--first text-small flex items-center"><a href="#" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-black mb-1"></span></a></li>
-            <li class="nav__item text-small flex items-center"><a href="#">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1"></span></a></li>
-            <li class="nav__item nav__item--last text-small flex items-center"><a href="#">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1"></span></a></li>
+            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
+            <li class="nav__item text-small flex items-center"><a href="#section1">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
           </ul>
         </div>
       </div>
@@ -19,6 +19,23 @@
         props: ["barHeight"],
         data () {
             return {
+                isActive: {
+                    landingBlock: true,
+                    contact: false
+                }
+            }
+        },
+        methods: {
+            onLandingBlockClick: function() {
+                this.resetActivesClass()
+                this.isActive.landingBlock = true
+            },
+            onContactClick: function() {
+                this.resetActivesClass()
+                this.isActive.contact = true
+            },
+            resetActivesClass: function() {
+                Object.keys(this.isActive).forEach( item => this.isActive[item] = false)
             }
         },
         async mounted () {
@@ -44,6 +61,10 @@
 
     .nav__item__right {
         right: -12px;
+    }
+
+    .active {
+        background: #000;
     }
 
     /* .nav__item::after {
