@@ -4,6 +4,7 @@
         <Section 
             v-for="experience in experiences"
             :key="experience.id"
+            :id="experience.id"
             :title="experience.title"
             :images="experience.images"
             :audio="experience.enregistrement"
