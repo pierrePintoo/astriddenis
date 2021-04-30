@@ -9,13 +9,10 @@
     </div>
     <div class="section__bottom flex align-center">
       <button class="btn section__bottom__left ml-14">
-        <play-button  width="22" height="22" class="pl-1" style="margin: auto;"/>
+        <play-button width="22" height="22" class="pl-1" style="margin: auto;" :audioURL="audio.url"/>
       </button>
       <a href="#" class="ml-6 text-linkBig">Écouter mes souvenirs</a>
     </div>
-            <audio controls>
-              <source :src="'http://localhost:1337' + audio.url" type="audio/ogg">
-            </audio>
   </div>
 </template>
 
