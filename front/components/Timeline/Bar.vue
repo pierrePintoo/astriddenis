@@ -1,7 +1,8 @@
 <template>
       <div :style="{height: `${this.barHeight - 60}px`}" class="bar flex flex-col items-end pb-14 sticky">
         <div>
-          <button class="btn bar__top relative pr-1">EN</button>
+          <button @click="switchLanguage()" v-if="$store.state.language === 'fr'" class="btn bar__top relative pr-1">EN</button>
+          <button @click="switchLanguage()" v-else class="btn bar__top relative pr-1">FR</button>
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
@@ -47,7 +48,6 @@
             },
             onExperienceClick: function(e) {
                 this.resetActivesClass()
-                console.log(e.target.localName)
                 if(e.target.localName === "span") {
                     e.target.classList.add('active')
                 } else if (e.target.localName === "a") {
@@ -66,7 +66,13 @@
                     this.experiencesCopy[item.title] = item
                     this.experiencesCopy[item.title].isActive = false
                 })
-                console.log(this.experiencesCopy)
+            },
+            switchLanguage: function() {
+                if(this.$store.state.language === 'fr') {
+                    this.$store.commit('switchLanguage', 'en')
+                } else {
+                    this.$store.commit('switchLanguage', 'fr')
+                }
             }
         },
         async mounted () {
