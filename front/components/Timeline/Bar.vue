@@ -7,7 +7,9 @@
           <ul class="h-full flex flex-col justify-between items-end">
             <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
             <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
-            <li v-if="showExperiences" v-for="experience in experiences" :key="experience.id" class="nav__item text-small flex items-center"><a href="#section1">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <div v-if="showExperiences" class="h-full flex flex-col justify-around">
+                <li  v-for="experience in experiences" :key="experience.id" class="nav__item text-small flex items-center"><a href="#section1">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            </div>
             <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
           </ul>
         </div>
