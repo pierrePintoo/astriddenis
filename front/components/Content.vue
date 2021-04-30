@@ -20,21 +20,6 @@
     export default {
         name: 'Content',
         components: { Section, Contact },
-        props: ['windowHeight'],
-        data () {
-            return {
-                experiences: []
-            }
-        },
-        async mounted () {
-            try {
-                // this.articles = await this.$strapi.$articles.find()
-                this.experiences = await this.$strapi.$experiences.find()
-                console.log('success' , this.experiences)
-            } catch (error) {
-                console.log('error')
-                this.error = error
-            }
-        }
+        props: ['windowHeight', 'experiences'],
     }
 </script>

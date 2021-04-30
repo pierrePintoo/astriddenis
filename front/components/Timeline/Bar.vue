@@ -6,7 +6,8 @@
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
             <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
-            <li class="nav__item text-small flex items-center"><a href="#section1">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <li v-if="showExperiences" v-for="experience in experiences" :key="experience.id" class="nav__item text-small flex items-center"><a href="#section1">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
             <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
           </ul>
         </div>
@@ -16,19 +17,23 @@
 <script>
     export default {
         name: 'Bar',
-        props: ["barHeight"],
+        props: ["barHeight", "experiences"],
         data () {
             return {
                 isActive: {
                     landingBlock: true,
                     contact: false
-                }
+                },
+                showExperiences: false
             }
         },
         methods: {
             onLandingBlockClick: function() {
                 this.resetActivesClass()
                 this.isActive.landingBlock = true
+            },
+            onExperiencesClick: function() {
+                this.showExperiences = true
             },
             onContactClick: function() {
                 this.resetActivesClass()

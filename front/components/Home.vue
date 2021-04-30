@@ -1,7 +1,7 @@
 <template>
   <div class="main flex justify-between bg-pink">
-    <Content :windowHeight = windowHeight />
-    <Bar :barHeight = windowHeight />
+    <Content :windowHeight = windowHeight :experiences = experiences />
+    <Bar :barHeight = windowHeight :experiences = experiences />
   </div>
 </template>
 
@@ -15,11 +15,21 @@ export default {
   data () {
     return {
       windowWidth: null,
-      windowHeight: window.innerHeight
+      windowHeight: window.innerHeight,
+      experiences: []
     }
   },
   async mounted () {
     this.launchResizeListener()
+
+    try {
+        // this.articles = await this.$strapi.$articles.find()
+        this.experiences = await this.$strapi.$experiences.find()
+        console.log('success' , this.experiences)
+    } catch (error) {
+        console.log('error')
+        this.error = error
+    }
   },
   async updated () {
     this.$nextTick(function () {
