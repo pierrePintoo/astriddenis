@@ -30,6 +30,7 @@
         methods: {
             onLandingBlockClick: function() {
                 this.resetActivesClass()
+                this.showExperiences = false
                 this.isActive.landingBlock = true
             },
             onExperiencesClick: function() {
