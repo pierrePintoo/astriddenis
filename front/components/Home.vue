@@ -8,6 +8,7 @@
 <script>
 import Content from "./Content"
 import Bar from "./Timeline/Bar"
+import axios from "axios"
 
 export default {
   name: 'Home',
@@ -24,10 +25,11 @@ export default {
 
     try {
         // this.articles = await this.$strapi.$articles.find()
-        this.experiences = await this.$strapi.$experiences.find()
-        console.log('success' , this.experiences)
+        const response = await axios.get('http://localhost:1337/experiences?_locale=en')
+        this.experiences = response.data
+        console.log('success', this.experiences)
     } catch (error) {
-        console.log('error')
+        console.log(error)
         this.error = error
     }
   },
