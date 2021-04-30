@@ -21,6 +21,7 @@
 
 <script>
 import ArrowRight from '~/components/Icons/ArrowRight.vue';
+import axios from "axios"
 
 export default {
   name: 'LandingBlock',
@@ -36,14 +37,28 @@ export default {
     }
   },
   async mounted () {
-    try {
-      // this.articles = await this.$strapi.$articles.find()
-      this.homeContent = await this.$strapi.$accueil.find()
-    } catch (error) {
-      console.log('error')
-      this.error = error
+    let response = this.getDatas('http://localhost:1337/accueil')
+    response.then( value => { this.homeContent = value } )
+  },
+  methods: {
+    getDatas: async function(url) {
+      try {
+          const response = await axios.get(url)
+          return response.data
+      } catch (error) {
+          console.log(error)
+      }
     }
-  }
+  },
+  async updated () {
+    if(this.$store.state.language === 'en') {
+      let response = this.getDatas('http://localhost:1337/accueil?_locale=en')
+      response.then( value => this.homeContent = value )
+    } else if (this.$store.state.language === 'fr') {
+      let response = this.getDatas('http://localhost:1337/accueil')
+      response.then( value => this.homeContent = value )
+      }
+    }
 }
 </script>
 <style scoped>
