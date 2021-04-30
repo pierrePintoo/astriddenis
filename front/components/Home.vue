@@ -22,18 +22,17 @@ export default {
   },
   async mounted () {
     this.launchResizeListener()
-
-    try {
-        // this.articles = await this.$strapi.$articles.find()
-        const response = await axios.get('http://localhost:1337/experiences?_locale=en')
-        this.experiences = response.data
-        console.log('success', this.experiences)
-    } catch (error) {
-        console.log(error)
-        this.error = error
-    }
+    let response = this.getDatas('http://localhost:1337/experiences')
+    response.then( value => this.experiences = value )
   },
   async updated () {
+    if(this.$store.state.language === 'en') {
+      let response = this.getDatas('http://localhost:1337/experiences?_locale=en')
+      response.then( value => this.experiences = value )
+    } else if (this.$store.state.language === 'fr') {
+      let response = this.getDatas('http://localhost:1337/experiences')
+      response.then( value => this.experiences = value )
+    }
     this.$nextTick(function () {
       // Code that will run only after the
       // entire view has been re-rendered
@@ -49,8 +48,17 @@ export default {
           window.addEventListener('resize', () => {
               this.windowHeight = window.innerHeight
           })
+      },
+      getDatas: async function(url) {
+        try {
+            // this.articles = await this.$strapi.$articles.find()
+            const response = await axios.get(url)
+            return response.data
+        } catch (error) {
+            console.log(error)
+        }
       }
-    }
+    },
 }
 </script>
 <style scoped>
