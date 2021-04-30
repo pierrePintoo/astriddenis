@@ -28,7 +28,6 @@
                     contact: false,
                 },
                 showExperiences: false,
-                experiencesCopy: [],
             }
         },
         methods: {
@@ -61,12 +60,6 @@
                     this.$refs.experiences.children.forEach( item => item.children[0].children[0].classList.remove('active'))
                 }
             },
-            createActiveClasses: function() {
-                Object.values(this.experiences).forEach(item => {
-                    this.experiencesCopy[item.title] = item
-                    this.experiencesCopy[item.title].isActive = false
-                })
-            },
             switchLanguage: function() {
                 if(this.$store.state.language === 'fr') {
                     this.$store.commit('switchLanguage', 'en')
@@ -74,12 +67,6 @@
                     this.$store.commit('switchLanguage', 'fr')
                 }
             }
-        },
-        async mounted () {
-            this.createActiveClasses()
-            setTimeout(() => {
-                this.createActiveClasses()
-            } , 1000)
         }
     }
 </script>
