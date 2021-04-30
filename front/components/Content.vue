@@ -20,6 +20,6 @@
     export default {
         name: 'Content',
         components: { Section, Contact },
-        props: ['windowHeight', 'experiences'],
+        props: ['windowHeight', 'experiences']
     }
 </script>
