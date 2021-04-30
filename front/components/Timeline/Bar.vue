@@ -7,8 +7,8 @@
           <ul class="h-full flex flex-col justify-between items-end">
             <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
             <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
-            <div v-if="showExperiences" class="h-full flex flex-col justify-around">
-                <li  v-for="experience in experiences" :key="experience.id" class="nav__item text-small flex items-center"><a href="#section1">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
+                <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event)" class="nav__item text-small flex items-center"><a :href="'#section' + experience.id">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
             </div>
             <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
           </ul>
@@ -24,9 +24,10 @@
             return {
                 isActive: {
                     landingBlock: true,
-                    contact: false
+                    contact: false,
                 },
-                showExperiences: false
+                showExperiences: false,
+                experiencesCopy: [],
             }
         },
         methods: {
@@ -36,18 +37,43 @@
                 this.isActive.landingBlock = true
             },
             onExperiencesClick: function() {
+                this.resetActivesClass()
                 this.showExperiences = true
+                setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 100)
             },
             onContactClick: function() {
                 this.resetActivesClass()
                 this.isActive.contact = true
             },
+            onExperienceClick: function(e) {
+                this.resetActivesClass()
+                console.log(e.target.localName)
+                if(e.target.localName === "span") {
+                    e.target.classList.add('active')
+                } else if (e.target.localName === "a") {
+                    e.target.children[0].classList.add('active')
+                }
+            },
             resetActivesClass: function() {
                 Object.keys(this.isActive).forEach( item => this.isActive[item] = false)
+                if(this.$refs.experiences) {
+                                            //li                      //a             //span
+                    this.$refs.experiences.children.forEach( item => item.children[0].children[0].classList.remove('active'))
+                }
+            },
+            createActiveClasses: function() {
+                Object.values(this.experiences).forEach(item => {
+                    this.experiencesCopy[item.title] = item
+                    this.experiencesCopy[item.title].isActive = false
+                })
+                console.log(this.experiencesCopy)
             }
         },
         async mounted () {
-            // console.log('wesheu : ', barHeight)
+            this.createActiveClasses()
+            setTimeout(() => {
+                this.createActiveClasses()
+            } , 1000)
         }
     }
 </script>
