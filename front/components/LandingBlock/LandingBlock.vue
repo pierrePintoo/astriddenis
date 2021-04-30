@@ -36,9 +36,18 @@ export default {
       homeContent: []
     }
   },
-  async mounted () {
+  async beforeMount () {
     let response = this.getDatas('http://localhost:1337/accueil')
     response.then( value => { this.homeContent = value } )
+    this.$store.watch(() => {
+      if(this.$store.state.language === 'en') {
+          let response = this.getDatas('http://localhost:1337/accueil?_locale=en')
+          response.then( value => this.homeContent = value )
+        } else if (this.$store.state.language === 'fr') {
+          let response = this.getDatas('http://localhost:1337/accueil')
+          response.then( value => this.homeContent = value )
+        }
+    })
   },
   methods: {
     getDatas: async function(url) {
@@ -49,16 +58,7 @@ export default {
           console.log(error)
       }
     }
-  },
-  async updated () {
-    if(this.$store.state.language === 'en') {
-      let response = this.getDatas('http://localhost:1337/accueil?_locale=en')
-      response.then( value => this.homeContent = value )
-    } else if (this.$store.state.language === 'fr') {
-      let response = this.getDatas('http://localhost:1337/accueil')
-      response.then( value => this.homeContent = value )
-      }
-    }
+  }
 }
 </script>
 <style scoped>

@@ -6,18 +6,20 @@
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold">Home<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
-            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1">Mes expériences <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold"> {{ homeContent.home_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
+            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1"> {{ homeContent.experiences_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
             <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
                 <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event)" class="nav__item text-small flex items-center"><a :href="'#section' + experience.id">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
             </div>
-            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact">Contact<span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
+            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact"> {{ homeContent.contact_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
           </ul>
         </div>
       </div>
 </template>
 
 <script>
+    import axios from "axios"
+
     export default {
         name: 'Bar',
         props: ["barHeight", "experiences"],
@@ -28,6 +30,7 @@
                     contact: false,
                 },
                 showExperiences: false,
+                homeContent: []
             }
         },
         methods: {
@@ -66,7 +69,29 @@
                 } else {
                     this.$store.commit('switchLanguage', 'fr')
                 }
+            },
+            getDatas: async function(url) {
+                try {
+                    // this.articles = await this.$strapi.$articles.find()
+                    const response = await axios.get(url)
+                    return response.data
+                } catch (error) {
+                    console.log(error)
+                }
             }
+        },
+        beforeMount() {
+            let response = this.getDatas('http://localhost:1337/accueil')
+            response.then( value => this.homeContent = value )
+            this.$store.watch(() => {
+                if(this.$store.state.language === 'en') {
+                    let response = this.getDatas('http://localhost:1337/accueil?_locale=en')
+                    response.then( value => this.homeContent = value )
+                    } else if (this.$store.state.language === 'fr') {
+                    let response = this.getDatas('http://localhost:1337/accueil')
+                    response.then( value => this.homeContent = value )
+                }
+            })
         }
     }
 </script>

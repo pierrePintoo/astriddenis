@@ -20,19 +20,21 @@ export default {
       experiences: []
     }
   },
-  async mounted () {
+  async beforeMount () {
     this.launchResizeListener()
     let response = this.getDatas('http://localhost:1337/experiences')
     response.then( value => this.experiences = value )
+    this.$store.watch(() => {
+      if(this.$store.state.language === 'en') {
+          let response = this.getDatas('http://localhost:1337/experiences?_locale=en')
+          response.then( value => this.homeContent = value )
+        } else if (this.$store.state.language === 'fr') {
+          let response = this.getDatas('http://localhost:1337/experiences')
+          response.then( value => this.homeContent = value )
+        }
+    })
   },
   async updated () {
-    if(this.$store.state.language === 'en') {
-      let response = this.getDatas('http://localhost:1337/experiences?_locale=en')
-      response.then( value => this.experiences = value )
-    } else if (this.$store.state.language === 'fr') {
-      let response = this.getDatas('http://localhost:1337/experiences')
-      response.then( value => this.experiences = value )
-    }
     this.$nextTick(function () {
       // Code that will run only after the
       // entire view has been re-rendered
