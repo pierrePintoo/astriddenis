@@ -52,8 +52,10 @@
                 this.resetActivesClass()
                 if(e.target.localName === "span") {
                     e.target.classList.add('active')
+                    e.target.parentElement.classList.add('labelActive')
                 } else if (e.target.localName === "a") {
                     e.target.children[0].classList.add('active')
+                    e.target.classList.add('labelActive')
                 }
             },
             resetActivesClass: function() {
@@ -61,6 +63,7 @@
                 if(this.$refs.experiences) {
                                             //li                      //a             //span
                     this.$refs.experiences.children.forEach( item => item.children[0].children[0].classList.remove('active'))
+                    this.$refs.experiences.children.forEach( item => item.children[0].classList.remove('labelActive'))
                 }
             },
             switchLanguage: function() {
