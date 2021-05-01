@@ -1,5 +1,5 @@
 <template>
-  <div id="contact" class="contact pr-4 h-screen">
+  <div id="sectionContact" class="contact pr-4 h-screen">
     <div class="contact__left h-full flex flex-col">
         <a href="#" class="contact__left__top text-linkBig mb-20">Astrido</a>
         <div class="contact__left__center">

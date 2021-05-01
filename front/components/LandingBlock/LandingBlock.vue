@@ -1,5 +1,5 @@
 <template>
-    <div :style="{height: `${this.windowHeight - 60}px`}" class="landing_block pb-14 pr-4" id="landingBlock">
+    <div :style="{height: `${this.windowHeight - 60}px`}" class="landing_block pb-14 pr-4">
       <div class="absolute right-96 top-32">
           <!-- <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src"> -->
       </div>
@@ -10,7 +10,7 @@
           <h1>{{ homeContent.catch_phrase }}</h1>
         </div>
         <div class="landing_block--left__bottom group flex items-center cursor-pointer">
-            <button class="btn absolute landing_block--left__bottom__left">
+            <button @click="onButtonClick()" class="btn absolute landing_block--left__bottom__left">
               <ArrowRight width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
             <a href="#" class="ml-14 text-linkBig">{{ homeContent.label_cta }}</a>
@@ -20,8 +20,11 @@
 </template>
 
 <script>
-import ArrowRight from '~/components/Icons/ArrowRight.vue';
+import ArrowRight from '~/components/Icons/ArrowRight.vue'
 import axios from "axios"
+import gsap from "gsap"
+import ScrollToPlugin from "gsap/ScrollToPlugin"
+gsap.registerPlugin(ScrollToPlugin)
 
 export default {
   name: 'LandingBlock',
@@ -37,6 +40,7 @@ export default {
     }
   },
   async beforeMount () {
+    console.log('scroll to ok 4')
     let response = this.getDatas('http://localhost:1337/accueil')
     response.then( value => { this.homeContent = value } )
     this.$store.watch(() => {
@@ -57,6 +61,9 @@ export default {
       } catch (error) {
           console.log(error)
       }
+    },
+    onButtonClick: function() {
+      gsap.to(window, {duration: 1, scrollTo: "#section1", ease: "power4.inOut"})
     }
   }
 }

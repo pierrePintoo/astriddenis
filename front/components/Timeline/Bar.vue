@@ -6,12 +6,28 @@
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="nav__item__label" :class="{labelActive: isActive.landingBlock}"> {{ homeContent.home_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
-            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1" class="nav__item__label"> {{ homeContent.experiences_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center">
+                <a class="nav__item__label" :class="{labelActive: isActive.landingBlock}"> {{ homeContent.home_bar_label}}
+                    <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span>
+                </a>
+            </li>
+            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center">
+                <a class="nav__item__label"> {{ homeContent.experiences_bar_label}}
+                    <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
+                </a>
+            </li>
             <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
-                <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event)" class="nav__item text-small flex items-center"><a :href="'#section' + experience.id" class="nav__item__label">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+                <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event, experience.id)" class="nav__item text-small flex items-center">
+                    <a class="nav__item__label">{{ experience.title }}
+                        <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
+                    </a>
+                </li>
             </div>
-            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact" class="nav__item__label" :class="{labelActive: isActive.contact}"> {{ homeContent.contact_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
+            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center">
+                <a class="nav__item__label" :class="{labelActive: isActive.contact}"> {{ homeContent.contact_bar_label}} 
+                    <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span>
+                </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -19,6 +35,9 @@
 
 <script>
     import axios from "axios"
+    import gsap from "gsap"
+    import ScrollToPlugin from "gsap/ScrollToPlugin"
+    gsap.registerPlugin(ScrollToPlugin)
 
     export default {
         name: 'Bar',
@@ -35,20 +54,24 @@
         },
         methods: {
             onLandingBlockClick: function() {
+                this.goToSection('Landing')
                 this.resetActivesClass()
                 this.showExperiences = false
                 this.isActive.landingBlock = true
             },
             onExperiencesClick: function() {
+                this.goToSection(this.experiences[0].id)
                 this.resetActivesClass()
                 this.showExperiences = true
                 setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 100)
             },
             onContactClick: function() {
+                this.goToSection("Contact")
                 this.resetActivesClass()
                 this.isActive.contact = true
             },
-            onExperienceClick: function(e) {
+            onExperienceClick: function(e, id) {
+                this.goToSection(id)
                 this.resetActivesClass()
                 if(e.target.localName === "span") {
                     e.target.classList.add('active')
@@ -81,6 +104,9 @@
                 } catch (error) {
                     console.log(error)
                 }
+            },
+            goToSection: function(id) {
+                gsap.to(window, {duration: 1, scrollTo: "#section" + id, ease: "power4.inOut"})
             }
         },
         beforeMount() {
