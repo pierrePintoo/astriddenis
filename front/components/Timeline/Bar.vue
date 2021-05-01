@@ -6,12 +6,12 @@
         </div>
         <div class="nav border-r border-black">
           <ul class="h-full flex flex-col justify-between items-end">
-            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="font-bold"> {{ homeContent.home_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
-            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1"> {{ homeContent.experiences_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center"><a href="#landingBlock" class="nav__item__label" :class="{labelActive: isActive.landingBlock}"> {{ homeContent.home_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span></a></li>
+            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center"><a href="#section1" class="nav__item__label"> {{ homeContent.experiences_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
             <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
-                <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event)" class="nav__item text-small flex items-center"><a :href="'#section' + experience.id">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
+                <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event)" class="nav__item text-small flex items-center"><a :href="'#section' + experience.id" class="nav__item__label">{{ experience.title }} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span></a></li>
             </div>
-            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact"> {{ homeContent.contact_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
+            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center"><a href="#contact" class="nav__item__label" :class="{labelActive: isActive.contact}"> {{ homeContent.contact_bar_label}} <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span></a></li>
           </ul>
         </div>
       </div>
@@ -117,6 +117,10 @@
 
     .active {
         background: #000;
+    }
+
+    .labelActive {
+        font-weight: 700;
     }
 
     /* .nav__item::after {
