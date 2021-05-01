@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-none">
+  <div class="container max-w-none" ref="container">
     <Home />
   </div>
 </template>
@@ -12,13 +12,6 @@ export default {
     return {
       articles: [],
       error: null
-    }
-  },
-  async mounted () {
-    try {
-      this.articles = await this.$strapi.$articles.find()
-    } catch (error) {
-      this.error = error
     }
   }
 }
