@@ -11,18 +11,22 @@
                     <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span>
                 </a>
             </li>
-            <li @click.stop="onExperiencesClick()" v-if="!showExperiences" class="nav__item text-small flex items-center">
-                <a class="nav__item__label"> {{ homeContent.experiences_bar_label}}
-                    <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
-                </a>
-            </li>
-            <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
-                <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event, experience.id)" class="nav__item text-small flex items-center">
-                    <a class="nav__item__label">{{ experience.title }}
+            <transition name="fade">
+                <li @click.stop="onExperiencesClick()" v-if="notShowExperiences" class="nav__item text-small flex items-center">
+                    <a class="nav__item__label"> {{ homeContent.experiences_bar_label}}
                         <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
                     </a>
                 </li>
-            </div>
+            </transition>
+            <transition name="fade">
+                <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
+                    <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event, experience.id)" class="nav__item text-small flex items-center">
+                        <a class="nav__item__label">{{ experience.title }}
+                            <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
+                        </a>
+                    </li>
+                </div>
+            </transition>
             <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center">
                 <a class="nav__item__label" :class="{labelActive: isActive.contact}"> {{ homeContent.contact_bar_label}} 
                     <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1" :class="{active: isActive.contact}"></span>
@@ -49,6 +53,7 @@
                     contact: false,
                 },
                 showExperiences: false,
+                notShowExperiences: true,
                 homeContent: []
             }
         },
@@ -57,13 +62,17 @@
                 this.goToSection('Landing')
                 this.resetActivesClass()
                 this.showExperiences = false
+                setTimeout(() => {
+                    this.notShowExperiences = true
+                }, 500)
                 this.isActive.landingBlock = true
             },
             onExperiencesClick: function() {
                 this.goToSection(this.experiences[0].id)
                 this.resetActivesClass()
-                this.showExperiences = true
-                setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 100)
+                this.notShowExperiences = false
+                setTimeout(() => this.showExperiences = true, 500)
+                setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 600)
             },
             onContactClick: function() {
                 this.goToSection("Contact")
@@ -152,14 +161,11 @@
         font-weight: 700;
     }
 
-    /* .nav__item::after {
-        position: absolute;
-        content: '';
-        width: 20px;
-        height: 20px;
-        border: solid 1px black;
-        border-radius: 9999px;
-        left: 10px;
-        background: #FFBFBF;
-    } */
+    /* Transitions properties */
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
 </style>
