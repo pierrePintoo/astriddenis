@@ -8,21 +8,21 @@
           <ul class="h-full flex flex-col justify-between items-end">
             <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center">
                 <a class="nav__item__label" :class="{labelActive: isActive.landingBlock}"> {{ homeContent.home_bar_label}}
-                    <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span>
+                    <span class="nav__item__right landing__block__item__inner absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" :class="{active: isActive.landingBlock}"></span>
                 </a>
             </li>
             <transition name="fade">
-                <li @click.stop="onExperiencesClick()" v-if="notShowExperiences" class="nav__item text-small flex items-center">
+                <li @click.stop="handleExperiences('click')" v-if="notShowExperiences" class="nav__item text-small flex items-center">
                     <a class="nav__item__label"> {{ homeContent.experiences_bar_label}}
                         <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
                     </a>
                 </li>
             </transition>
             <transition name="fade">
-                <div v-if="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
-                    <li v-for="experience in experiences" :key="experience.id" @click.stop="onExperienceClick($event, experience.id)" class="nav__item text-small flex items-center">
+                <div v-show="showExperiences" class="h-full flex flex-col justify-around" ref="experiences">
+                    <li v-for="experience in experiences" :key="experience.id" @click.stop="handleExperience($event, 'click', experience.id)" :id="'section__item' + experience.id" class="nav__item section__item text-small flex items-center">
                         <a class="nav__item__label">{{ experience.title }}
-                            <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1" ></span>
+                            <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mb-1"></span>
                         </a>
                     </li>
                 </div>
@@ -54,7 +54,9 @@
                 },
                 showExperiences: false,
                 notShowExperiences: true,
-                homeContent: []
+                homeContent: [],
+                scroll,
+                sectionCounter: null
             }
         },
         methods: {
@@ -67,28 +69,46 @@
                 }, 500)
                 this.isActive.landingBlock = true
             },
-            onExperiencesClick: function() {
-                this.goToSection(this.experiences[0].id)
-                this.resetActivesClass()
-                this.notShowExperiences = false
-                setTimeout(() => this.showExperiences = true, 500)
-                setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 600)
+            handleExperiences: function(handleType) {
+                if(handleType === "click") {
+                    this.goToSection(this.experiences[0].id)
+                    this.resetActivesClass()
+                    this.notShowExperiences = false
+                    setTimeout(() => this.showExperiences = true, 500)
+                    setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 600)
+                } else if (handleType === "scroll"){
+                    this.resetActivesClass()
+                    this.notShowExperiences = false
+                    setTimeout(() => this.showExperiences = true, 500)
+                    setTimeout(() => this.$refs.experiences.children[0].children[0].children[0].classList.add('active'), 600)
+                }
             },
             onContactClick: function() {
                 this.goToSection("Contact")
                 this.resetActivesClass()
                 this.isActive.contact = true
             },
-            onExperienceClick: function(e, id) {
-                this.goToSection(id)
+            handleExperience: function(e, handleType, id) {
                 this.resetActivesClass()
-                if(e.target.localName === "span") {
-                    e.target.classList.add('active')
-                    e.target.parentElement.classList.add('labelActive')
-                } else if (e.target.localName === "a") {
-                    e.target.children[0].classList.add('active')
-                    e.target.classList.add('labelActive')
+                if(handleType === "click"){
+                    this.goToSection(id)
+                    if(e.target.localName === "span") {
+                        e.target.classList.add('active')
+                        e.target.parentElement.classList.add('labelActive')
+                    } else if (e.target.localName === "a") {
+                        e.target.children[0].classList.add('active')
+                        e.target.classList.add('labelActive')
+                    }
+                } else if (handleType === "scroll") {
+                    if(e.localName === "span") {
+                        e.classList.add('active')
+                        e.parentElement.classList.add('labelActive')
+                    } else if (e.localName === "a") {
+                        e.children[0].classList.add('active')
+                        e.classList.add('labelActive')
+                    }
                 }
+
             },
             resetActivesClass: function() {
                 Object.keys(this.isActive).forEach( item => this.isActive[item] = false)
@@ -104,6 +124,10 @@
                 } else {
                     this.$store.commit('switchLanguage', 'fr')
                 }
+            },
+            onScroll: function() {
+                document.getElementsByClassName('landing__block__item__inner')[0].classList.remove('active')
+                this.notShowExperiences = false
             },
             getDatas: async function(url) {
                 try {
@@ -130,6 +154,22 @@
                     response.then( value => this.homeContent = value )
                 }
             })
+        },
+        mounted(){
+            const windowH = window.innerHeight
+            window.addEventListener('scroll', e => {
+                if(window.scrollY >= windowH / 2) {
+
+                    this.sectionCounter = 0
+                }
+            })
+        },
+        watch: {
+            sectionCounter: function (val) {
+                let sections = document.getElementsByClassName('section__item')
+                this.handleExperiences('scroll')
+                this.handleExperience(sections[val], 'scroll')
+            }
         }
     }
 </script>
