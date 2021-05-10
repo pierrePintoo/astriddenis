@@ -9,8 +9,8 @@
           <h1>{{ homeContent.presentation }}</h1>
           <h1>{{ homeContent.catch_phrase }}</h1>
         </div>
-        <div class="landing_block--left__bottom group flex items-center cursor-pointer">
-            <button @click="onButtonClick()" class="btn absolute landing_block--left__bottom__left">
+        <div @click="onButtonClick()" class="landing_block--left__bottom group flex items-center cursor-pointer">
+            <button class="btn absolute landing_block--left__bottom__left">
               <ArrowRight width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
             <a href="#" class="ml-14 text-linkBig">{{ homeContent.label_cta }}</a>
