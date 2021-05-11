@@ -6,7 +6,7 @@
         </div>
         <div class="nav border-r border-black" >
           <ul class="h-full flex flex-col justify-between items-end">
-            <li @click.stop="onLandingBlockClick()" class="nav__item nav__item--first text-small flex items-center">
+            <li @click.stop="onLandingBlockClick($event)" class="nav__item nav__item--first text-small flex items-center">
                 <a class="nav__item__label"> {{ homeContent.home_bar_label}}
                     <span class="nav__item__right landing__block__item__inner absolute w-6 h-6 border border-black rounded-full bg-pink mb-1"></span>
                 </a>
@@ -27,7 +27,7 @@
                     </li>
                 </div>
             </transition>
-            <li @click.stop="onContactClick()" class="nav__item nav__item--last text-small flex items-center">
+            <li @click.stop="onContactClick($event)" class="nav__item nav__item--last text-small flex items-center">
                 <a class="nav__item__label"> {{ homeContent.contact_bar_label}} 
                     <span class="nav__item__right absolute w-6 h-6 border border-black rounded-full bg-pink mt-1"></span>
                 </a>
@@ -48,55 +48,50 @@
         props: ["barHeight", "experiences"],
         data () {
             return {
-                isActive: {
-                    landingBlock: true,
-                    contact: false,
-                },
                 showExperiences: false,
                 notShowExperiences: true,
                 homeContent: [],
                 scroll,
                 sectionCounter: null,
-                sections: null
+                sections: null,
+                isClicked: false
             }
         },
         methods: {
-            onLandingBlockClick: function() {
+            onLandingBlockClick: function(e) {
+                this.isClicked = true
                 this.goToSection('Landing')
                 this.resetActivesClass()
+                this.addActivesClasses(e)
                 this.showExperiences = false
                 setTimeout(() => this.notShowExperiences = true, 300)
-                this.isActive.landingBlock = true
             },
             handleExperiences: function(handleType, e) {
                 if(handleType === "click") {
+                    this.isClicked = true
                     this.goToSection(this.experiences[0].id)
                     this.notShowExperiences = false
                     setTimeout(() => this.showExperiences = true, 300)
+                    this.addFirstActivesClasses()
                 } else if (handleType === "scroll"){
                     this.resetActivesClass()
                     this.notShowExperiences = false
                     this.showExperiences = true
-                    this.$refs.experiences.children[0].children[0].children[0].classList.add('active')
-                    this.$refs.experiences.children[0].classList.add('labelActive')
+                    this.addFirstActivesClasses()
                 }
             },
-            onContactClick: function() {
+            onContactClick: function(e) {
+                this.isClicked = true
                 this.goToSection("Contact")
                 this.resetActivesClass()
-                this.isActive.contact = true
+                this.addActivesClasses(e)
             },
             handleExperience: function(e, handleType, id) {
                 this.resetActivesClass()
                 if(handleType === "click"){
+                    this.isClicked = true
                     this.goToSection(id)
-                    if(e.target.localName === "span") {
-                        e.target.classList.add('active')
-                        e.target.parentElement.classList.add('labelActive')
-                    } else if (e.target.localName === "a") {
-                        e.target.children[0].classList.add('active')
-                        e.target.parentElement.classList.add('labelActive')
-                    }
+                    this.addActivesClasses(e)
                 } else if (handleType === "scroll") {
                     if(e.localName === "span") {
                         e.classList.add('active')
@@ -104,6 +99,19 @@
                     }
                 }
 
+            },
+            addFirstActivesClasses: function() {
+                this.$refs.experiences.children[0].children[0].children[0].classList.add('active')
+                this.$refs.experiences.children[0].classList.add('labelActive')
+            },
+            addActivesClasses: function(e) {
+                if(e.target.localName === "span") {
+                    e.target.classList.add('active')
+                    e.target.parentElement.classList.add('labelActive')
+                } else if (e.target.localName === "a") {
+                    e.target.children[0].classList.add('active')
+                    e.target.parentElement.classList.add('labelActive')
+                }
             },
             resetActivesClass: function() {
                 let navItems = document.getElementsByClassName('nav__item')
@@ -134,7 +142,7 @@
             },
             goToSection: function(id) {
                 gsap.killTweensOf(window)
-                gsap.to(window, {duration: 1, scrollTo: "#section" + id, ease: "power4.inOut"})
+                gsap.to(window, {duration: 1, scrollTo: "#section" + id, ease: "power4.inOut", onComplete: () => this.isClicked = false})
             }
         },
         beforeMount() {
@@ -157,7 +165,7 @@
             let oldScrollY = 0
             window.addEventListener('scroll', e => {
                 newScrollY = window.scrollY
-                if(newScrollY > oldScrollY) {
+                if(newScrollY > oldScrollY && this.isClicked === false) {
                     // Scroll down
                     if(window.scrollY >= windowH / 2 && window.scrollY <= windowH + windowH2) {
                         this.sectionCounter = 1
@@ -165,7 +173,7 @@
                     if(window.scrollY > windowH * this.sectionCounter + windowH2){
                         this.sectionCounter++
                     }
-                } else {
+                } else if(this.isClicked === false) {
                     // Scroll up
                     if(window.scrollY >= windowH / 2 && window.scrollY <= windowH + windowH2) {
                         this.sectionCounter = 1
@@ -178,6 +186,7 @@
         },
         watch: {
             sectionCounter: function (val) {
+                console.log(this.sectionCounter)
                 this.sections = document.getElementsByClassName('nav__item__right')
                 if(val === 1){
                     this.handleExperiences('scroll')
