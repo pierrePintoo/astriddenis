@@ -65,18 +65,18 @@
                 this.goToSection('Landing')
                 this.resetActivesClass()
                 this.showExperiences = false
-                setTimeout(() => {
-                    this.notShowExperiences = true
-                }, 500)
+                setTimeout(() => this.notShowExperiences = true, 300)
                 this.isActive.landingBlock = true
             },
             handleExperiences: function(handleType, e) {
                 if(handleType === "click") {
                     this.goToSection(this.experiences[0].id)
+                    this.notShowExperiences = false
+                    setTimeout(() => this.showExperiences = true, 300)
                 } else if (handleType === "scroll"){
                     this.resetActivesClass()
                     this.notShowExperiences = false
-                    setTimeout(() => this.showExperiences = true, 500)
+                    this.showExperiences = true
                     this.$refs.experiences.children[0].children[0].children[0].classList.add('active')
                     this.$refs.experiences.children[0].classList.add('labelActive')
                 }
@@ -95,7 +95,7 @@
                         e.target.parentElement.classList.add('labelActive')
                     } else if (e.target.localName === "a") {
                         e.target.children[0].classList.add('active')
-                        e.target.classList.add('labelActive')
+                        e.target.parentElement.classList.add('labelActive')
                     }
                 } else if (handleType === "scroll") {
                     if(e.localName === "span") {
@@ -106,11 +106,7 @@
 
             },
             resetActivesClass: function() {
-                // Object.keys(this.isActive).forEach( item => this.isActive[item] = false)
-                
-                // Common item list (first and last)
                 let navItems = document.getElementsByClassName('nav__item')
-                console.log(navItems)
                 if(this.$refs.experiences) {
                                             //li                      //a             //span
                     navItems.forEach( item => item.children[0].children[0].classList.remove('active') )
@@ -130,7 +126,6 @@
             },
             getDatas: async function(url) {
                 try {
-                    // this.articles = await this.$strapi.$articles.find()
                     const response = await axios.get(url)
                     return response.data
                 } catch (error) {
@@ -138,6 +133,7 @@
                 }
             },
             goToSection: function(id) {
+                gsap.killTweensOf(window)
                 gsap.to(window, {duration: 1, scrollTo: "#section" + id, ease: "power4.inOut"})
             }
         },
@@ -208,6 +204,14 @@
         padding-right: 3.5rem;
     }
 
+    .nav__item {
+        padding: 16px;
+    }
+
+    .nav__item:hover {
+        cursor: pointer;
+    }
+
     .nav__item__right {
         right: -12px;
     }
@@ -222,8 +226,9 @@
 
     /* Transitions properties */
     .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
+        transition: opacity .3s;
     }
+
     .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
         opacity: 0;
     }
