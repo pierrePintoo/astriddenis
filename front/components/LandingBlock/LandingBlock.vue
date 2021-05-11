@@ -1,5 +1,5 @@
 <template>
-    <div :style="{height: `${this.windowHeight - 60}px`}" class="landing_block pb-14 pr-4">
+    <div :style="{height: `${this.windowHeight - 60}px`}" id="landing_block" class="landing_block pb-14 pr-4">
       <div class="absolute right-96 top-32">
           <!-- <img src="~/assets/astrid-head.svg" alt="Visage astrid" class="src"> -->
       </div>
@@ -40,7 +40,6 @@ export default {
     }
   },
   async beforeMount () {
-    console.log('scroll to ok 4')
     let response = this.getDatas('http://localhost:1337/accueil')
     response.then( value => { this.homeContent = value } )
     this.$store.watch(() => {
