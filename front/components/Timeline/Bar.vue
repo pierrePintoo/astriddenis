@@ -37,9 +37,9 @@
         <div class="bar_container">
             <div>
                 <ul class="labels_list">
-                    <li class="labels_list__item">Accueil</li>
-                    <li class="labels_list__item">Expériences</li>
-                    <li class="labels_list__item">Contact</li>
+                    <li class="labels_list__item" @click.stop="onLandingBlockClick($event)">Accueil</li>
+                    <li class="labels_list__item" @click.stop="handleExperiences('click', $event)">Expériences</li>
+                    <li class="labels_list__item" @click.stop="onContactClick($event)">Contact</li>
                 </ul>
             </div>
             <div class="bar_style">
@@ -79,6 +79,7 @@
         },
         methods: {
             onLandingBlockClick: function(e) {
+                this.checkSectionCount()
                 this.isClicked = true
                 this.goToSection('Landing')
                 this.resetActivesClass()
@@ -166,7 +167,7 @@
             },
             checkSectionCount: function() {
                 this.newScrollY = window.scrollY
-                if(this.newScrollY > this.oldScrollY && this.isClicked === false) {
+                if(this.newScrollY > this.oldScrollY) {
                     // Scroll down
                     if(window.scrollY >= this.windowH / 2 && window.scrollY <= this.windowH + this.windowH2) {
                         this.sectionCounter = 1
@@ -174,7 +175,7 @@
                     if(window.scrollY > this.windowH * this.sectionCounter + this.windowH2) {
                         this.sectionCounter++
                     }
-                } else if(this.isClicked === false) {
+                } else {
                     // Scroll up
                     if(window.scrollY >= this.windowH / 2 && window.scrollY <= this.windowH + this.windowH2) {
                         this.sectionCounter = 1
@@ -185,6 +186,7 @@
                     }
                 }
                 this.oldScrollY = this.newScrollY
+                console.log(this.sectionCounter)
             }
         },
         beforeMount() {
