@@ -4,7 +4,7 @@
           <button @click="switchLanguage()" v-if="$store.state.language === 'fr'" class="btn bar__top relative pr-1">EN</button>
           <button @click="switchLanguage()" v-else class="btn bar__top relative pr-1">FR</button>
         </div>
-        <div class="nav border-r border-black" >
+        <!-- <div class="nav border-r border-black" >
           <ul class="h-full flex flex-col justify-between items-end">
             <li @click.stop="onLandingBlockClick($event)" class="nav__item nav__item--first text-small flex items-center">
                 <a class="nav__item__label"> {{ homeContent.home_bar_label}}
@@ -33,7 +33,22 @@
                 </a>
             </li>
           </ul>
+        </div> -->
+        <div class="bar_container">
+            <div>
+                <ul class="labels_list">
+                    <li class="labels_list__item">Accueil</li>
+                    <li class="labels_list__item">Expériences</li>
+                    <li class="labels_list__item">Contact</li>
+                </ul>
+            </div>
+            <div class="bar_style">
+                <span ref="homeBullet" class="bullet"></span>
+                <span ref="experiencesBullet" class="bullet"></span>
+                <span ref="contactBullet" class="bullet"></span>
+            </div>
         </div>
+
       </div>
 </template>
 
@@ -54,7 +69,11 @@
                 scroll,
                 sectionCounter: null,
                 sections: null,
-                isClicked: false
+                isClicked: false,
+                windowH: window.innerHeight,
+                windowH2: window.innerHeight / 2,
+                newScrollY: 0,
+                oldScrollY: 0
             }
         },
         methods: {
@@ -72,12 +91,12 @@
                     this.goToSection(this.experiences[0].id)
                     this.notShowExperiences = false
                     setTimeout(() => this.showExperiences = true, 300)
-                    this.addFirstActivesClasses()
+                    // this.addFirstActivesClasses()
                 } else if (handleType === "scroll"){
                     this.resetActivesClass()
                     this.notShowExperiences = false
                     this.showExperiences = true
-                    this.addFirstActivesClasses()
+                    // this.addFirstActivesClasses()
                 }
             },
             onContactClick: function(e) {
@@ -143,6 +162,29 @@
             goToSection: function(id) {
                 gsap.killTweensOf(window)
                 gsap.to(window, {duration: 1, scrollTo: "#section" + id, ease: "power4.inOut", onComplete: () => this.isClicked = false})
+            },
+            checkSectionCount: function() {
+                this.newScrollY = window.scrollY
+                console.log('', this.newScrollY)
+                if(this.newScrollY > this.oldScrollY && this.isClicked === false) {
+                    // Scroll down
+                    if(window.scrollY >= this.windowH / 2 && window.scrollY <= this.windowH + this.windowH2) {
+                        this.sectionCounter = 1
+                    } 
+                    if(window.scrollY > this.windowH * this.sectionCounter + this.windowH2) {
+                        this.sectionCounter++
+                    }
+                } else if(this.isClicked === false) {
+                    // Scroll up
+                    if(window.scrollY >= this.windowH / 2 && window.scrollY <= this.windowH + this.windowH2) {
+                        this.sectionCounter = 1
+                    } else if (window.scrollY < this.windowH * (this.sectionCounter - 1) + this.windowH2) {
+                        this.sectionCounter--
+                    } else if (this.newScrollY === 0) {
+                        this.sectionCounter = 0
+                    }
+                }
+                this.oldScrollY = this.newScrollY
             }
         },
         beforeMount() {
@@ -159,40 +201,39 @@
             })
         },
         mounted(){
-            const windowH = window.innerHeight
-            const windowH2 = windowH / 2
-            let newScrollY = 0
-            let oldScrollY = 0
-            window.addEventListener('scroll', e => {
-                newScrollY = window.scrollY
-                if(newScrollY > oldScrollY && this.isClicked === false) {
-                    // Scroll down
-                    if(window.scrollY >= windowH / 2 && window.scrollY <= windowH + windowH2) {
-                        this.sectionCounter = 1
-                    } 
-                    if(window.scrollY > windowH * this.sectionCounter + windowH2){
-                        this.sectionCounter++
-                    }
-                } else if(this.isClicked === false) {
-                    // Scroll up
-                    if(window.scrollY >= windowH / 2 && window.scrollY <= windowH + windowH2) {
-                        this.sectionCounter = 1
-                    } else if (window.scrollY < windowH * (this.sectionCounter - 1) + windowH2) {
-                        this.sectionCounter--
-                    }
-                }
-                oldScrollY = newScrollY
+            this.checkSectionCount()
+            window.addEventListener('scroll', () => {
+                this.checkSectionCount()
             })
         },
         watch: {
             sectionCounter: function (val) {
                 console.log(this.sectionCounter)
+
+                const activeSection = this.sectionCounter
                 this.sections = document.getElementsByClassName('nav__item__right')
                 if(val === 1){
                     this.handleExperiences('scroll')
                 } else if(val < this.sections.length) {
                     this.handleExperience(this.sections[val], 'scroll')
                 }
+
+                this.$refs.homeBullet.style.background = this.$store.state.colors.pink
+                this.$refs.experiencesBullet.style.background = this.$store.state.colors.pink
+                this.$refs.contactBullet.style.background = this.$store.state.colors.pink
+
+                switch (activeSection) {
+                    case 0:
+                        this.$refs.homeBullet.style.background = 'black'
+                        break;
+                    case 1:
+                        this.$refs.experiencesBullet.style.background = 'black'
+                        break;
+                    case 2:
+                        this.$refs.contactBullet.style.background = 'black'
+                        break;
+                }
+
             }
         }
     }
@@ -240,5 +281,43 @@
 
     .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
         opacity: 0;
+    }
+
+    .bar_container {
+        width: 150%;
+        height: 100%;
+        display: flex;
+        padding-top: 50px;
+        justify-content: space-between;
+    }
+
+    .labels_list {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .bar_style {
+        width: 1px;
+        background: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .labels_list__item {
+        display: block;
+        width: 100px;
+    }
+
+    .bullet {
+        height: 20px;
+        width: 20px;
+        background: black;
+        border-radius: 9999px;
+        border-width: 1px;
+        position: relative;
+        right: 9px;
     }
 </style>

@@ -1,5 +1,8 @@
 const state = () => ({
-    language: 'fr'
+    language: 'fr',
+    colors: {
+      pink: '#FFBFBF'
+    }
   })
   
   const actions = {
