@@ -73,7 +73,8 @@
                 windowH: window.innerHeight,
                 windowH2: window.innerHeight / 2,
                 newScrollY: 0,
-                oldScrollY: 0
+                oldScrollY: 0,
+                countExperiences: 0
             }
         },
         methods: {
@@ -165,7 +166,6 @@
             },
             checkSectionCount: function() {
                 this.newScrollY = window.scrollY
-                console.log('', this.newScrollY)
                 if(this.newScrollY > this.oldScrollY && this.isClicked === false) {
                     // Scroll down
                     if(window.scrollY >= this.windowH / 2 && window.scrollY <= this.windowH + this.windowH2) {
@@ -201,14 +201,16 @@
             })
         },
         mounted(){
+            console.log('experiences', this.experiences)
             this.checkSectionCount()
             window.addEventListener('scroll', () => {
                 this.checkSectionCount()
+
+                this.countExperiences = this.experiences.length
             })
         },
         watch: {
             sectionCounter: function (val) {
-                console.log(this.sectionCounter)
 
                 const activeSection = this.sectionCounter
                 this.sections = document.getElementsByClassName('nav__item__right')
@@ -226,11 +228,11 @@
                     case 0:
                         this.$refs.homeBullet.style.background = 'black'
                         break;
-                    case 1:
-                        this.$refs.experiencesBullet.style.background = 'black'
-                        break;
-                    case 2:
+                    case this.countExperiences + 1:
                         this.$refs.contactBullet.style.background = 'black'
+                        break;
+                    default:
+                        this.$refs.experiencesBullet.style.background = 'black'
                         break;
                 }
 
