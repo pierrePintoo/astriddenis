@@ -13,7 +13,7 @@
             <button class="btn absolute landing_block--left__bottom__left">
               <ArrowRight width="20" height="20" class="" style="margin: auto; transform:rotate(90deg)"/>
             </button>
-            <a href="#" class="ml-14 text-linkBig">{{ homeContent.label_cta }}</a>
+            <span href="" class="ml-14 text-linkBig">{{ homeContent.label_cta }}</span>
         </div>
       </div>
     </div>
@@ -62,7 +62,9 @@ export default {
       }
     },
     onButtonClick: function() {
-      gsap.to(window, {duration: 1, scrollTo: "#section1", ease: "power4.inOut"})
+      gsap.killTweensOf(window)
+      gsap.to(window, {duration: 1, scrollTo: ".section", ease: "power4.inOut"})
+
     }
   }
 }
