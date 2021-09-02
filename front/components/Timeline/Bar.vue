@@ -37,15 +37,15 @@
         <div class="bar_container">
             <div>
                 <ul class="labels_list">
-                    <li class="labels_list__item" @click.stop="onLandingBlockClick($event)">Accueil</li>
-                    <li class="labels_list__item" @click.stop="handleExperiences('click', $event)">Expériences</li>
-                    <li class="labels_list__item" @click.stop="onContactClick($event)">Contact</li>
+                    <li ref="homeLabel" class="labels_list__item" @click.stop="onLandingBlockClick($event)">{{ homeContent.home_bar_label}}</li>
+                    <li ref="experiencesLabel" class="labels_list__item" @click.stop="handleExperiences('click', $event)">{{ homeContent.experiences_bar_label}}</li>
+                    <li ref="contactLabel" class="labels_list__item" @click.stop="onContactClick($event)">{{ homeContent.contact_bar_label}} </li>
                 </ul>
             </div>
             <div class="bar_style">
-                <span ref="homeBullet" class="bullet"></span>
-                <span ref="experiencesBullet" class="bullet"></span>
-                <span ref="contactBullet" class="bullet"></span>
+                <span ref="homeBullet" class="bullet" @click.stop="onLandingBlockClick($event)"></span>
+                <span ref="experiencesBullet" class="bullet" @click.stop="handleExperiences('click', $event)"></span>
+                <span ref="contactBullet" class="bullet" @click.stop="onContactClick($event)"></span>
             </div>
         </div>
 
@@ -225,16 +225,22 @@
                 this.$refs.homeBullet.style.background = this.$store.state.colors.pink
                 this.$refs.experiencesBullet.style.background = this.$store.state.colors.pink
                 this.$refs.contactBullet.style.background = this.$store.state.colors.pink
+                this.$refs.homeLabel.style.fontWeight = 400
+                this.$refs.experiencesLabel.style.fontWeight = 400
+                this.$refs.contactLabel.style.fontWeight = 400
 
                 switch (activeSection) {
                     case 0:
                         this.$refs.homeBullet.style.background = 'black'
+                        this.$refs.homeLabel.style.fontWeight = 600
                         break;
                     case this.countExperiences + 1:
                         this.$refs.contactBullet.style.background = 'black'
+                        this.$refs.contactLabel.style.fontWeight = 600
                         break;
                     default:
                         this.$refs.experiencesBullet.style.background = 'black'
+                        this.$refs.experiencesLabel.style.fontWeight = 600
                         break;
                 }
 
@@ -323,5 +329,9 @@
         border-width: 1px;
         position: relative;
         right: 9px;
+    }
+
+    .labels_list__item:hover, .bullet:hover {
+        cursor: pointer;
     }
 </style>
