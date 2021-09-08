@@ -1,0 +1,13 @@
+/* ./assets/css/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'LekyCalgria';
+    src: url(../fonts/LekyCalgria/LekyCalgriaPersonalUse-ywJRd.ttf) format('truetype');
+}
+
+.title-font {
+    font-family: 'LekyCalgria';
+}
