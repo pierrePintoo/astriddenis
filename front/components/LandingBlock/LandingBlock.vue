@@ -22,8 +22,8 @@
       <div class="landing_block--left h-full flex flex-col justify-between">
         <a href="#" class="landing_block--left__top text-linkBig">{{ homeContent.title }}</a>
         <div class="landing_block--left__center">
-          <h1 class="title-font">{{ homeContent.presentation }}</h1>
-          <h1 class="title-font">{{ homeContent.catch_phrase }}</h1>
+          <h1 class="title-font title-big">{{ homeContent.presentation }}</h1>
+          <h1 class="title-font title-big">{{ homeContent.catch_phrase }}</h1>
         </div>
         <div @click="onButtonClick()" class="landing_block--left__bottom group flex items-center cursor-pointer">
             <button class="btn absolute landing_block--left__bottom__left">
@@ -34,7 +34,7 @@
       </div>
     </div>
 </template>
-
+*
 <script>
 import ArrowRight from '~/components/Icons/ArrowRight.vue'
 import axios from "axios"

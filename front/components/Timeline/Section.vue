@@ -5,7 +5,7 @@
   >
     <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
-      <h2 class="section__title ml-16 text-big">{{ title }}</h2>
+      <h2 class="section__title ml-16 text-big title-font title-medium">{{ title }}</h2>
     </div>
     <div class="section__img" ref="sectionImg">
       <img v-for="image in images" :key="image.id" :src="'http://localhost:1337' + image.url" class="section__img__item" :id="'img__item__' + image.id" alt="" />

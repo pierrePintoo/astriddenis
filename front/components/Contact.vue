@@ -3,7 +3,7 @@
     <div class="contact__left h-full flex flex-col">
         <a href="#" class="contact__left__top text-linkBig mb-20">Astrido</a>
         <div class="contact__left__center">
-          <h2 class="mb-20">{{ contactContent.catch_phrase }}</h2>
+          <h2 class="mb-20 title-font">{{ contactContent.catch_phrase }}</h2>
           <h1 class="underline"><a href="mailto:astriddns@gmail.com">{{ contactContent.Email }}</a></h1>
           <h1 class="underline"><a :href="'tel:' + contactContent.telephone">{{ contactContent.telephone }}</a></h1>
         </div>

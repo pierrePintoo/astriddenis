@@ -4,10 +4,28 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'LekyCalgria';
-    src: url(../fonts/LekyCalgria/LekyCalgriaPersonalUse-ywJRd.ttf) format('truetype');
+    font-family: 'Kaisei';
+    src: url(../fonts/Kaisei/KaiseiHarunoUmi-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'HerbertRegular';
+    src: url(../fonts/Herbert/HerbertRegular.ttf) format('truetype');
+}
+
+body {
+    font-family: 'Kaisei';
 }
 
 .title-font {
-    font-family: 'LekyCalgria';
+    font-family: 'HerbertRegular';
+}
+
+.title-big {
+    font-size: 6rem;
+    font-weight: 200;
+}
+
+.title-medium {
+    font-size: 3rem;
 }
