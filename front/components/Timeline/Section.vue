@@ -5,10 +5,11 @@
   >
     <div class="section__top">
       <span class="section__bullet btn bg-pink block absolute"></span>
-      <h2 class="section__title ml-16 text-big title-font title-medium">{{ title }}</h2>
+      <h2 class="section__title ml-16 text-big title-font">{{ title }}</h2>
     </div>
     <div class="section__img" ref="sectionImg">
-      <img v-for="image in images" :key="image.id" :src="'http://localhost:1337' + image.url" class="section__img__item" :id="'img__item__' + image.id" alt="" />
+      <img v-for="image in images" :key="image.id" :src="'http://localhost:1337' + image.url" :class="'section__img__item section__img__item--' + id" :id="'img__item__' + image.id" alt="" />
+      <!-- <div :class="'fake-opacity fake-opacity--' + id"></div> -->
     </div>
     <div class="section__bottom flex align-center">
       <button class="btn section__bottom__left ml-14">
@@ -48,12 +49,34 @@ export default {
   },
   mounted() {
     const imagesSection = this.$refs.sectionImg
-    const images = imagesSection.childNodes
+    const section = document.getElementById(`section${this.id}`)
+    const images = section.querySelectorAll('.section__img__item')
 
     for(let i = 0; i < images.length; i++) {
       images[i].style.marginLeft = `${this.getRandomInt(15, 70)}px`
       images[i].style.transform = `rotate(${this.getRandomInt(-30, 30)}deg)`
     }
+
+    // // Push hover effect with JS
+    // let css = `
+    // .section__img__item--${this.id}, .fake-opacity--${this.id}
+    // {
+    //   transition: 0.5s opacity ease !important;
+    // }
+
+    // .section__img__item--${this.id}:hover ~ .fake-opacity--${this.id}
+    // {
+    //   opacity: 0.5 !important;
+    // }`;
+    // let style = document.createElement('style');
+
+    // if (style.styleSheet) {
+    //     style.styleSheet.cssText = css;
+    // } else {
+    //     style.appendChild(document.createTextNode(css));
+    // }
+
+    // document.getElementsByTagName('head')[0].appendChild(style);
   }
   // created() {
   //   let imagesLoaded = 0;
@@ -121,8 +144,28 @@ export default {
 .section__img__item {
   height: 30%;
   margin: 0 40px;
+  transition: 0.5s transform ease;
   /* position: absolute;
   top: 17%;
   left: -5%; */
+}
+
+.section__img__item:hover {
+  transform: rotate(0deg) scale(1.75) !important;
+}
+
+/* .section__img__item--5:hover ~ .fake-opacity--5 {
+  opacity: 0.5 !important;
+} */
+
+.fake-opacity {
+  height: 10000px;
+  width: 200vw;
+  top: -100vw;
+  left: -200px;
+  background: white;
+  position: absolute;
+  z-index: 10;
+  opacity: 0;
 }
 </style>

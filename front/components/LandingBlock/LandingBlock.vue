@@ -34,7 +34,7 @@
       </div>
     </div>
 </template>
-*
+
 <script>
 import ArrowRight from '~/components/Icons/ArrowRight.vue'
 import axios from "axios"
