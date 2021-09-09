@@ -186,7 +186,6 @@
                     }
                 }
                 this.oldScrollY = this.newScrollY
-                console.log(this.sectionCounter)
             }
         },
         beforeMount() {
@@ -203,7 +202,6 @@
             })
         },
         mounted(){
-            console.log('experiences', this.experiences)
             this.checkSectionCount()
             window.addEventListener('scroll', () => {
                 this.checkSectionCount()
